@@ -1,0 +1,49 @@
+# Laravel
+/vendor/
+node_modules/
+public/storage
+storage/*.key
+.env
+.env.*.php
+.env.*.json
+Homestead.yaml
+Homestead.json
+
+# Laravel logs / cache / generated files
+/storage/*.key
+/storage/app/*.php
+/storage/app/public
+/storage/framework/*
+/storage/logs/*
+/bootstrap/cache/*.php
+
+# Cache & debug
+.phpunit.result.cache
+.phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php
+
+# Composer
+composer.lock
+composer.phar
+
+# Node / npm / yarn
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# IDE / Editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Other common files
+/public/hot
+/public/storage
+/public/uploads
+/storage/debugbar
