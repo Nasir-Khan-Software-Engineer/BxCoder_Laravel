@@ -6,13 +6,13 @@
     <div class="card full-height-card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <div class="d-flex gap-2 align-items-center">
-                <h3>Project List</h3>
+                <h3>Category List</h3>
             </div>
             <div class="d-flex gap-2 align-items-center">
-                <input type="text" class="form-control data-table-search" id="searchProject" placeholder="Search Project">
+                <input type="text" class="form-control data-table-search" id="searchCategory" placeholder="Search Category">
                 <div class="vr mx-1"></div>
                 <div class="text-right">
-                    <a href="{{ route('admin.projects.create') }}" class="btn btn-sm thm-btn-bg thm-btn-text-color" id="createProjectBtn">Create New Project</a>
+                    <a href="{{ route('admin.categories.create') }}" class="btn btn-sm thm-btn-bg thm-btn-text-color" id="createCategoryBtn">Create New Category</a>
                 </div>
             </div>
         </div>
@@ -37,36 +37,31 @@
             </div>
             @endif
 
-
-
-
-            <table class="table table-bordered" id="projectTable">
+            <table class="table table-bordered" id="categoryTable">
                 <thead>
                     <tr>
-                        <th class="text-center" style="width: 10%;">ID</th>
-                        <th class="text-center" style="width: 35%;">TITLE</th>
-                        <th class="text-center" style="width: 20%;">CREATED ON</th>
-                        <th class="text-center" style="width: 20%;">CREATED BY</th>
-                        <th class="text-center" style="width: 15%;">ACTION</th>
+                        <th class="text-center" style="width: 8%;">ID</th>
+                        <th class="text-center" style="width: 20%;">Name</th>
+                        <th class="text-center" style="width: 20%;">Slug</th>
+                        <th class="text-center" style="width: 20%;">Keywords</th>
+                        <th class="text-center" style="width: 27%;">Description</th>
+                        <th class="text-center" style="width: 20%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($projects as $project)
+                    @foreach($categories as $category)
                     <tr>
-                        <td class="text-center align-middle">{{ $project->id }}</td>
-                        <td class="align-middle text-center">{{ $project->title }}</td>
+                        <td class="text-center align-middle">{{ $category->id }}</td>
+                        <td class="text-center align-middle">{{ $category->name }}</td>
+                        <td class="text-center align-middle">{{ $category->slug }}</td>
+                        <td class="text-center align-middle">{{ $category->keywords }}</td>
+                        <td class="align-middle">{{ Str::limit($category->description, 50) }}</td>
                         <td class="text-center align-middle">
-                            <div class="text-center align-middle">
-                                {{ $project->formatedCreatedAt }}
-                            </div>
-                        </td>
-                        <td class="text-center align-middle">{{ $project->creator?->name }}</td>
-                        <td class="text-center align-middle">
-                            <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}" class="btn btn-sm thm-btn-bg thm-btn-text-color">
+                            <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}" class="btn btn-sm thm-btn-bg thm-btn-text-color">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
 
-                            <button data-id="{{ $project->id }}" class="btn btn-sm thm-btn-bg thm-btn-text-color delete-project">
+                            <button data-id="{{ $category->id }}" class="btn btn-sm thm-btn-bg thm-btn-text-color delete-category">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
@@ -74,60 +69,34 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
-
     </div>
-</div>
-
-<div id="createProjectModalContainer">
-
 </div>
 
 @endsection
 
 @section('script')
-@vite(['resources/js/project-script.js'])
+@vite(['resources/js/category-script.js'])
 <script>
-let ProjectUrls = {
-    'deleteProject': "{{ route('admin.projects.destroy', ['project' => 'projectId']) }}"
+
+let CategoryUrls = {
+    'deleteCategory': "{{ route('admin.categories.destroy', ['category' => 'categoryId']) }}"
 };
 
 $(document).ready(function() {
-    BxCoder.Datatable.initDataTable('#projectTable', {
-        order: [
-            [0, 'desc']
-        ],
-        columns: [{
-                type: 'num',
-                orderable: true
-            },
-            {
-                type: 'string',
-                orderable: true
-            },
-            {
-                type: 'string',
-                orderable: true
-            },
-            {
-                type: 'string',
-                orderable: true
-            },
-            {
-                type: 'string',
-                orderable: false
-            },
-        ]
+    BxCoder.Datatable.initDataTable('#categoryTable', {
+        order: [[0, 'desc']]
     });
 
-    $("#searchProject").on("keyup search input paste cut", function() {
+    $("#searchCategory").on("keyup search input paste cut", function() {
         BxCoder.Datatable.filter($(this).val());
     });
 
-    $('#projectTable').on("click", ".delete-project", function() {
+    $('#categoryTable').on("click", ".delete-category", function() {
         BxCoder.Datatable.selectRow(this);
-        if (confirm("Are you sure you want to delete this project?")) {
-            BxCoder.Project.deleteProject($(this).data('id'));
+        if (confirm("Are you sure you want to delete this category?")) {
+            BxCoder.Category.deleteCategory($(this).data('id'));
         }
     });
 });

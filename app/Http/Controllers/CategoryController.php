@@ -16,8 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $categories = Category::with('creator', 'updater')->latest()->get();
-            return view('categories.index', compact('categories'));
+            $categories = Category::all();
+            return view('admin.category.index', compact('categories'));
         } catch (\Throwable $e) {
             Log::error('Category Index Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return redirect()->back()->with('error', 'Something went wrong while fetching categories.');
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function create()
     {
         try {
-            return view('categories.create');
+            return view('admin.category.create');
         } catch (\Throwable $e) {
             Log::error('Category Create Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json(['status' => 'error', 'message' => 'Failed to load create form'], 500);
@@ -58,7 +58,8 @@ class CategoryController extends Controller
                 'created_by' => Auth::id(),
             ]);
 
-            return response()->json(['status' => 'success', 'message' => 'Category created successfully', 'category' => $category]);
+            return redirect()->route('admin.categories.index')
+                ->with('success', 'Post created successfully.');
         } catch (\Throwable $e) {
             Log::error('Category Store Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json(['status' => 'error', 'message' => 'Failed to create category'], 500);
@@ -78,7 +79,12 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        try {
+            return view('admin.category.edit', compact('category'));
+        } catch (\Throwable $e) {
+            Log::error('Category Edit Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            return response()->json(['status' => 'error', 'message' => 'Failed to load edit form'], 500);
+        }
     }
 
     /**
@@ -101,8 +107,9 @@ class CategoryController extends Controller
                 'description' => $request->description,
                 'updated_by' => Auth::id(),
             ]);
-
-            return response()->json(['status' => 'success', 'message' => 'Category updated successfully', 'category' => $category]);
+            return redirect()->route('admin.categories.index')
+                ->with('success', 'Post created successfully.');
+            
         } catch (\Throwable $e) {
             Log::error('Category Update Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json(['status' => 'error', 'message' => 'Failed to update category'], 500);

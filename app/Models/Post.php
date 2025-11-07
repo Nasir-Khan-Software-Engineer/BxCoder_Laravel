@@ -18,6 +18,9 @@ class Post extends Model
         'project_url',
         'created_by',
         'updated_by',
+        'is_active',
+        'video_url',
+        'code_url',
     ];
 
     // Relation to creator

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -17,7 +18,7 @@ class PostController extends Controller
             foreach ($posts as $post) {
                 $post->formatedCreatedAt = formatDateAndTime($post->created_at);
             }
-            return view('posts.index', compact('posts'));
+            return view('admin.post.index', compact('posts'));
         } catch (\Throwable $e) {
             Log::error('Post Index Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return redirect()->back()->with('error', 'Failed to fetch posts.');
@@ -27,7 +28,10 @@ class PostController extends Controller
     public function create()
     {
         try {
-            return view('posts.create');
+
+            $categories = Category::all();
+            return view('admin.post.create', compact('categories'));
+
         } catch (\Throwable $e) {
             Log::error('Post Create Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json(['status' => 'error', 'message' => 'Failed to load create form'], 500);
@@ -45,6 +49,8 @@ class PostController extends Controller
                 'image'        => 'nullable|string',
                 'body'         => 'nullable|string',
                 'project_url'  => 'nullable|url',
+                'video_url'  => 'nullable|url',
+                'code_url'  => 'nullable|url',
                 'categories'   => 'required|array',       // NEW
                 'categories.*' => 'exists:categories,id', // NEW
             ]);
@@ -57,13 +63,17 @@ class PostController extends Controller
                 'image'       => $request->image,
                 'body'        => $request->body,
                 'project_url' => $request->project_url,
+                'video_url' => $request->video_url,
+                'code_url' => $request->code_url,
+                'image' => $request->image_link,
                 'created_by'  => Auth::id(),
             ]);
 
             // Attach categories
             $post->categories()->attach($request->categories);
 
-            return response()->json(['status' => 'success', 'message' => 'Post created successfully', 'post' => $post]);
+            return redirect()->route('admin.posts.index')
+                ->with('success', 'Post created successfully.');
 
         } catch (\Throwable $e) {
             Log::error('Post Store Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
@@ -74,7 +84,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         try {
-            return view('posts.edit', compact('post'));
+            $categories = Category::all();
+            return view('admin.post.edit', compact('categories','post'));
         } catch (\Throwable $e) {
             Log::error('Post Edit Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json(['status' => 'error', 'message' => 'Failed to load edit form'], 500);
@@ -95,6 +106,8 @@ class PostController extends Controller
                 'project_url'  => 'nullable|url',
                 'categories'   => 'required|array',       // NEW
                 'categories.*' => 'exists:categories,id', // NEW
+                'video_url'  => 'nullable|url',
+                'code_url'  => 'nullable|url',
             ]);
 
             $post->update([
@@ -105,13 +118,15 @@ class PostController extends Controller
                 'image'       => $request->image,
                 'body'        => $request->body,
                 'project_url' => $request->project_url,
+                'video_url' => $request->video_url,
+                'code_url' => $request->code_url,
                 'updated_by'  => Auth::id(),
             ]);
 
             // Sync categories (overwrite old ones)
             $post->categories()->sync($request->categories);
 
-            return response()->json(['status' => 'success', 'message' => 'Post updated successfully', 'post' => $post]);
+            return redirect()->route('admin.posts.index')->with('success', 'Project updated successfully.');
 
         } catch (\Throwable $e) {
             Log::error('Post Update Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);

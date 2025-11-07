@@ -4,14 +4,14 @@
 <div class="view-container">
     <div class="card full-height-card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h3>Create New Project</h3>
-            <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary btn-sm">
+            <h3>Create New Category</h3>
+            <a href="{{ route('admin.categories.index') }}" class="btn btn-secondary btn-sm">
                 <i class="fa-solid fa-arrow-left"></i> Back to List
             </a>
         </div>
 
         <div class="card-body">
-            <form action="{{ route('admin.projects.store') }}" method="POST">
+            <form action="{{ route('admin.categories.store') }}" method="POST">
                 @csrf
 
                 @if ($errors->any())
@@ -25,52 +25,30 @@
                 @endif
 
                 <div class="form-group mb-3">
-                    <label>Title <span class="text-danger">*</span></label>
-                    <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
-                    @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+                    <label>Name <span class="text-danger">*</span></label>
+                    <input type="text" name="name" class="form-control"
+                        value="{{ old('name') }}" required>
+                    @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
                 <div class="form-group mb-3">
-                    <label>Categories <span class="text-danger">*</span></label>
-                    <select name="categories[]" class="form-control" multiple required>
-                        @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ in_array($category->id, old('categories', [])) ? 'selected':'' }}>
-                            {{ $category->name }}
-                        </option>
-                        @endforeach
-                    </select>
-                    <small class="text-muted">You can select multiple</small>
-                    @error('categories') <small class="text-danger">{{ $message }}</small> @enderror
+                    <label>Slug <span class="text-danger">*</span></label>
+                    <input type="text" name="slug" class="form-control"
+                        value="{{ old('slug') }}" required>
+                    <small class="text-muted">Example: web-development</small>
+                    @error('slug') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
 
                 <div class="form-group mb-3">
                     <label>Keywords</label>
-                    <input type="text" name="keywords" class="form-control" value="{{ old('keywords') }}" placeholder="E.g., laravel, ecommerce, inventory">
+                    <input type="text" name="keywords" class="form-control"
+                        value="{{ old('keywords') }}" placeholder="E.g., beauty, haircare, nails">
+                    <small class="text-muted">Separate multiple keywords using commas.</small>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label>Short Description</label>
-                    <textarea name="short_description" class="form-control" rows="3">{{ old('short_description') }}</textarea>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Details</label>
-                    <textarea name="details" class="form-control" rows="6">{{ old('details') }}</textarea>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Source Code Link</label>
-                    <input type="text" name="source_code_link" class="form-control" value="{{ old('source_code_link') }}">
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Video Link</label>
-                    <input type="text" name="video_link" class="form-control" value="{{ old('video_link') }}">
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Documentation Link</label>
-                    <input type="text" name="documentation_link" class="form-control" value="{{ old('documentation_link') }}">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" rows="4">{{ old('description') }}</textarea>
                 </div>
 
                 <div class="text-right">
@@ -86,9 +64,15 @@
 @endsection
 
 @section('script')
-@vite(['resources/js/project-script.js'])
+@vite(['resources/js/category-script.js'])
 
 <script>
-
+    // Auto-generate slug from name
+    $("input[name='name']").on("keyup", function() {
+        let text = $(this).val().toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+        $("input[name='slug']").val(text);
+    });
 </script>
 @endsection

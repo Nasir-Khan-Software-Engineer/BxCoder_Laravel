@@ -14,6 +14,9 @@ export default defineConfig({
                 'resources/js/common.js',
                 'resources/js/datatable_service.js',
                 'resources/js/project-script.js',
+                'resources/js/post-script.js',
+                'resources/js/category-script.js',
+                'resources/js/validator-script.js'
             ],
             refresh: true,
         }),
