@@ -1,41 +1,41 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Project extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'slug',
+        'title',
         'keywords',
-        'description',
+        'short_description',
+        'details',
+        'source_code_link',
+        'video_link',
+        'documentation_link',
         'created_by',
-        'updated_by',
+        'updated_by'
     ];
 
-    // Category created by user
+    // Creator relation
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    // Category updated by user
+    // Updater relation
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
-    public function posts()
-    {
-        return $this->belongsToMany(Post::class)->withTimestamps();
-    }
 
-    public function projects()
+    // Many-to-many relation with categories
+    public function categories()
     {
-        return $this->belongsToMany(Project::class)->withTimestamps();
+        return $this->belongsToMany(Category::class)->withTimestamps();
     }
-
 }

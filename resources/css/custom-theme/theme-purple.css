@@ -1,0 +1,71 @@
+
+/* 
+Example Palette from #5e1d66
+
+Primary (base) → #5e1d66
+Light (hover) → #7b3b84
+Lighter (backgrounds) → #9c57a2
+Dark (active/focus) → #3e1343
+Contrast text → #ffffff 
+
+Buttons → normal = base, hover = light, active = dark
+Alerts → base border dark, background light
+Links → hover tint, focus dark
+Disabled states → #875b8b
+
+*/
+
+
+.thm-btn-bg{
+    background-color: #5e1d66 !important;
+}
+.thm-btn-bg:hover{
+    background-color: #7b3b84 !important; 
+}
+.thm-btn-text-color{
+    color: #ffffff !important;
+}
+.thm-btn-bg-active-bg{
+    background-color: #3e1343 !important;
+}
+.thm-btn-disabled-bg{
+    background-color: #875b8b !important;
+}
+.thm-btn-disabled-text-color{
+    color: #c0c0c0 !important;
+}
+/* // data table pagination active */
+.page-item.active .page-link{
+    background-color: #5e1d66 !important;
+    border-color: #5e1d66 !important;
+}
+
+.thm-tbl-header-bg th{
+    background-color: #5e1d66 !important;
+}
+.thm-tbl-header-text-color th{
+    color: #ffffff !important;
+}
+
+/* Blink animation class */
+.blink-border {
+  animation: blink 0.5s ease-in-out 10; /* 0.5s per blink, 2 times */
+  border: 1px solid #e583d3; /* pink border */
+  border-radius: 15px;
+}
+
+@keyframes blink {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #e583d3;
+  }
+}
+
+/* Info icon styling with theme colors */
+.fas.fa-info-circle {
+    cursor: pointer !important;
+    color: #5e1d66 !important;
+    font-size: 20px;
+}

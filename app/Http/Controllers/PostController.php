@@ -13,6 +13,10 @@ class PostController extends Controller
     {
         try {
             $posts = Post::with('creator', 'updater')->latest()->get();
+            // format created at time 
+            foreach ($posts as $post) {
+                $post->formatedCreatedAt = formatDateAndTime($post->created_at);
+            }
             return view('posts.index', compact('posts'));
         } catch (\Throwable $e) {
             Log::error('Post Index Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);

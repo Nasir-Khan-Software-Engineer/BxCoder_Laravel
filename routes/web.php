@@ -2,13 +2,17 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ProjectController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -21,7 +25,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])
     ->prefix('dashboard')
-    ->name('dashboard.')
+    ->name('admin.')
     ->group(function () {
 
         // --- Category Routes ---
@@ -42,6 +46,20 @@ Route::middleware(['auth', 'verified'])
             Route::get('/{post}/edit', [PostController::class, 'edit'])->name('edit');
             Route::put('/{post}/update', [PostController::class, 'update'])->name('update');
             Route::delete('/{post}/delete', [PostController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/', [SettingController::class, 'index'])->name('index');
+            Route::post('/update', [SettingController::class, 'update'])->name('update');
+        });
+
+        Route::prefix('projects')->name('projects.')->group(function () {
+            Route::get('/', [ProjectController::class, 'index'])->name('index');
+            Route::get('/create', [ProjectController::class, 'create'])->name('create');
+            Route::post('/store', [ProjectController::class, 'store'])->name('store');
+            Route::get('/{project}/edit', [ProjectController::class, 'edit'])->name('edit');
+            Route::put('/{project}/update', [ProjectController::class, 'update'])->name('update');
+            Route::delete('/{project}/delete', [ProjectController::class, 'destroy'])->name('destroy');
         });
 
         // --- You can add more dashboard routes here ---

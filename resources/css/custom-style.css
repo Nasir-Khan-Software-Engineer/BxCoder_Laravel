@@ -1,0 +1,95 @@
+h3 {
+    margin: 0 !important;
+}
+input,select,textarea{
+    border: 1px solid #333 !important;
+    border-radius: 0 !important;
+}
+#saleDate,
+.cart-qty-input{
+    border: 1px solid rgb(222, 226, 230) !important;
+}
+
+.datatable{
+    width: 100%!important;
+}
+
+.dataTable{
+    width: 100%!important;
+}
+
+.required-star{
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+}
+.absolute-star{
+    position: absolute;
+    top: -8px;
+}
+.force-cursor-pointer {
+    cursor: pointer !important;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.disabled,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item.disabled {
+    color: #a9adb1ff;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.disabled,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item.disabled {
+    color: #a9adb1ff;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+ul#accordionSidebar{
+    position: relative;
+}
+.sidebar-footer{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #e5e5e5;
+    font-size: 12px;
+}
+.full-height-card {
+    height: calc(100vh - 70px) !important;
+}
+
+.full-height-card .card-header {
+    padding: 5px;
+}
+.full-height-card .card-header .data-table-search{
+    border-radius: 5px !important;
+    width: 300px !important;
+    border: 2px solid #5e1d66 !important;
+    height: 32px !important;
+}
+
+.dt-container .mt-2{
+    margin-top: 0 !important;
+}
+
+/* Success toast */
+#toast-container > .toast-success {
+    opacity: 1 !important;
+}
+
+/* Error toast */
+#toast-container > .toast-error {
+    opacity: 1 !important;
+}
+
+/* Info toast */
+#toast-container > .toast-info {
+    opacity: 1 !important;
+}
+
+/* Warning toast */
+#toast-container > .toast-warning {
+  opacity: 1 !important;
+}

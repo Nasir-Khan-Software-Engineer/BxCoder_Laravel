@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->longText('body')->nullable();
             $table->string('project_url')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
