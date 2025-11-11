@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 1000);
-            $table->string('email', 200);
-            $table->string('phone', 11);
-            $table->string('address', 1000);
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
 
             $table->text('logo');
             $table->text('favicon');
 
-            $table->string('meta_title', 200);
-            $table->string('meta_keywords', 1000);
-            $table->string('meta_description', 1000);
+            $table->string('meta_title');
+            $table->string('meta_keywords');
+            $table->string('meta_description');
 
-            $table->string('copyright', 200);
+            $table->string('copyright');
 
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();

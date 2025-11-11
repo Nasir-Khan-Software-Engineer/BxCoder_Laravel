@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('name')->unique()->index();
-            $table->string('slug')->unique()->index();
-            $table->text('image')->nullable();
-            $table->boolean('status')->default(true);
-            $table->string('keywords');
-            $table->string('description');
-            
+
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->string('payment_method');
+            $table->string('payment_status')->default('pending');
+            $table->decimal('amount', 12, 2);
+            $table->string('transaction_id', 255)->nullable();
+            $table->timestamp('paid_at')->nullable();
+
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
-            
-            $table->timestamps(); // created_at and updated_at
+
+            $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('payments');
     }
 };

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('product_stock_id')->constrained('product_stocks')->cascadeOnDelete();
 
             $table->string('product_name');
             $table->enum('discount_type', ['fixed', 'percentage'])->nullable();

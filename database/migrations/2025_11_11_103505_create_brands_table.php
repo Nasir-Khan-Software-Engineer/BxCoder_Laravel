@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             
-            $table->string('name', 200)->unique()->index();
-            $table->string('slug', 300)->unique()->index();
+            $table->string('name')->unique()->index();
+            $table->string('slug')->unique()->index();
             $table->text('image')->nullable();
             $table->boolean('status')->default(true);
-            $table->string('keywords', 1000);
-            $table->string('description', 1000);
+            $table->string('keywords');
+            $table->string('description');
             
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();

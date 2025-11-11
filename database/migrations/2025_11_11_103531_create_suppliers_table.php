@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
-            $table->string('payment_method', 50);
-            $table->string('payment_status', 50)->default('pending');
-            $table->decimal('amount', 12, 2);
-            $table->string('transaction_id', 255)->nullable();
-            $table->timestamp('paid_at')->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone')->unique()->index();
+            $table->string('address')->nullable();
+
+            $table->boolean('status')->default(true);
 
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
 
-            $table->timestamps();
+            $table->timestamps(); // created_at and updated_at
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('suppliers');
     }
 };

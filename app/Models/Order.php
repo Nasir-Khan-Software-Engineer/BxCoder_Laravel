@@ -57,4 +57,16 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    // payments
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    // order items
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('address_1', 1000);
-            $table->string('address_2', 1000)->nullable();
+            $table->string('address_1');
+            $table->string('address_2')->nullable();
 
             $table->timestamps(); // created_at and updated_at
         });
