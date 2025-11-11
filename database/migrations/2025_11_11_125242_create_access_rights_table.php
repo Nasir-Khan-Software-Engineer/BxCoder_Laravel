@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('access_rights', function (Blueprint $table) {
             $table->id();
 
-            $table->string('route_name');
-            $table->string('short_id');
+            $table->string('route_name')->unique();
+            $table->string('short_id')->unique();
             $table->string('short_description');
             $table->string('details', 1000)->nullable();
 

@@ -4,36 +4,38 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Post;
-use Illuminate\Support\Str;
 use App\Models\Category;
+use App\Models\User;
 
 class PostSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
-        $posts = [
-            ['title' => 'Post One', 'slug' => 'post-one'],
-            ['title' => 'Post Two', 'slug' => 'post-two'],
-            ['title' => 'Post Three', 'slug' => 'post-three'],
-            ['title' => 'Post Four', 'slug' => 'post-four'],
-            ['title' => 'Post Five', 'slug' => 'post-five'],
-        ];
+        $users = User::take(2)->get(); // creator/updater
+        $categories = Category::take(5)->get(); // some categories
 
-        foreach ($posts as $postData) {
+        for ($i = 1; $i <= 5; $i++) {
             $post = Post::create([
-                'title' => $postData['title'],
-                'slug' => $postData['slug'],
-                'keywords' => $postData['slug'] . ',demo,laravel',
-                'description' => "This is the {$postData['title']} description",
-                'body' => "This is the body content of {$postData['title']}.",
-                'project_url' => 'https://example.com/' . $postData['slug'],
-                'created_by' => 1, // Ensure user id 1 exists
+                'title' => "Post $i",
+                'slug' => "post-$i",
+                'keywords' => "post$i, laravel, php",
+                'description' => "Description for Post $i",
+                'image' => null, // or set image path/base64
+                'body' => "This is the body content for Post $i",
+                'project_url' => "https://example.com/project$i",
+                'video_url' => "https://youtube.com/example/video$i",
+                'code_url' => "https://github.com/example/code$i",
+                'created_by' => $users->first()->id,
+                'updated_by' => $users->last()->id,
+                'is_active' => true,
             ]);
 
-            // Attach random categories (example: 2 categories each)
-            $categoryIds = Category::inRandomOrder()->take(2)->pluck('id')->toArray();
-            $post->categories()->attach($categoryIds);
+            // attach random categories (1-3 per post)
+            $postCategories = $categories->random(rand(1,3))->pluck('id')->toArray();
+            $post->categories()->sync($postCategories);
         }
     }
 }
-

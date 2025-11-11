@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
             'description' => 'Administrator with full access to all modules.',
             'is_active' => true,
             'is_default' => false,
-            'created_by' => 1, // assuming user id 1 is super admin
+            //'created_by' => 1, // assuming user id 1 is super admin
         ]);
 
         // Create Salesperson role
@@ -24,7 +24,15 @@ class RoleSeeder extends Seeder
             'description' => 'Salesperson with limited access to sales related modules.',
             'is_active' => true,
             'is_default' => false,
-            'created_by' => 1,
+            //'created_by' => 1,
+        ]);
+
+        Role::create([
+            'name' => 'Customer',
+            'description' => 'Customer with limited access to sales related modules.',
+            'is_active' => true,
+            'is_default' => false,
+            //'created_by' => 1,
         ]);
     }
 }

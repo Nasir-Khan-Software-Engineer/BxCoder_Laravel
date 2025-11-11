@@ -22,28 +22,28 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(UserDetailsSeeder::class);
         $this->call(SettingSeeder::class);
+        $this->call(AccessRightRoleSeeder::class);
 
-        // Brands and categories
+        // // Brands and categories
         $this->call(BrandSeeder::class);
         $this->call(CategorySeeder::class);
 
-        // Products and related
+        // // Products and related
+         $this->call(SupplierSeeder::class);
+
         $this->call(ProductSeeder::class);
         $this->call(ProductImageSeeder::class);
         $this->call(ProductStockSeeder::class);
 
-        // Content
-        $this->call(ProjectSeeder::class);
+        // // Content
+         $this->call(ProjectSeeder::class);
         $this->call(PostSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(ReviewSeeder::class);
 
-        // E-commerce
-        $this->call(SupplierSeeder::class);
+        // // E-commerce
         $this->call(CouponSeeder::class);
-        $this->call(PaymentSeeder::class);
         $this->call(OrderSeeder::class);
-        $this->call(OrderItemSeeder::class);
 
         $this->call(SiteFeatureSeeder::class);    // Main site features
         

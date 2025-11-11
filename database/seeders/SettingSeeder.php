@@ -10,10 +10,10 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-            'site_name' => 'My Blog & Source Code Project',
-            'site_email' => 'info@example.com',
-            'site_phone' => '+880123456789',
-            'site_logo' => 'logo.png',
+            'name' => 'My Blog & Source Code Project',
+            'email' => 'info@example.com',
+            'phone' => '+880123456789',
+            'logo' => 'logo.png',
             'favicon' => 'favicon.ico',
             'meta_title' => 'My Blog & Source Code Project',
             'meta_keywords' => 'blog, laravel, source code, projects',

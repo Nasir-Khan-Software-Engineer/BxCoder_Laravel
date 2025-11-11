@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Support\Str;
+
 class CategorySeeder extends Seeder
 {
     /**
@@ -13,21 +14,24 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Technology', 'slug' => 'technology'],
-            ['name' => 'Business', 'slug' => 'business'],
-            ['name' => 'Health', 'slug' => 'health'],
-            ['name' => 'Education', 'slug' => 'education'],
-            ['name' => 'Entertainment', 'slug' => 'entertainment'],
+            ['name' => 'Laptops', 'description' => 'All types of laptops and notebooks.'],
+            ['name' => 'Smartphones', 'description' => 'Smartphones from various brands.'],
+            ['name' => 'Headphones', 'description' => 'Audio devices including headphones and earphones.'],
+            ['name' => 'Monitors', 'description' => 'Computer monitors and displays.'],
         ];
 
         foreach ($categories as $category) {
-            Category::create([
-                'name' => $category['name'],
-                'slug' => $category['slug'],
-                'keywords' => $category['slug'] . ',info,articles',
-                'description' => "This is the {$category['name']} category.",
-                'created_by' => 1, // Make sure user id=1 exists
-            ]);
+            Category::updateOrCreate(
+                ['name' => $category['name']],
+                [
+                    'description' => $category['description'],
+                    'slug' => Str::slug($category['name']),
+                    'keywords' => $category['name'],
+                    'status' => true,
+                    'created_by' => 1,
+                    'updated_by' => null,
+                ]
+            );
         }
     }
 }

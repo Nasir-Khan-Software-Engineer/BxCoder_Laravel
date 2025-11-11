@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('address');
+            $table->string('address')->nullable();
 
             $table->text('logo');
             $table->text('favicon');
@@ -35,9 +35,9 @@ return new class extends Migration
             $table->string('youtube')->nullable();
             $table->string('tiktok')->nullable();
 
-            $table->string('product_prefix', 10);
-            $table->string('order_prefix', 10);
-            $table->string('invoice_prefix', 10);
+            $table->string('product_prefix', 10)->nullable();
+            $table->string('order_prefix', 10)->nullable();
+            $table->string('invoice_prefix', 10)->nullable();
 
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();

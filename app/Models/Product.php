@@ -37,9 +37,10 @@ class Product extends Model
         'is_active' => 'boolean',
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id')
+                    ->withTimestamps();
     }
 
     public function brand()
