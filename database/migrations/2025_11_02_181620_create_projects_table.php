@@ -13,16 +13,20 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+
             $table->string('title')->unique();
-            $table->string('keywords')->nullable();
-            $table->text('short_description')->nullable();
-            $table->longText('details')->nullable();
+            $table->string('keywords');
+            $table->string('short_description');
+            $table->text('details');
+
             $table->string('source_code_link')->nullable();
             $table->string('video_link')->nullable();
             $table->string('documentation_link')->nullable();
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamps();
+
+            $table->timestamps(); // created_at and updated_at
         });
 
         // Pivot table for Project ↔ Category

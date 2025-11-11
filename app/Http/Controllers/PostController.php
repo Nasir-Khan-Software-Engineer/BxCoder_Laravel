@@ -12,136 +12,26 @@ class PostController extends Controller
 {
     public function index()
     {
-        try {
-            $posts = Post::with('creator', 'updater')->latest()->get();
-            // format created at time 
-            foreach ($posts as $post) {
-                $post->formatedCreatedAt = formatDateAndTime($post->created_at);
-            }
-            return view('admin.post.index', compact('posts'));
-        } catch (\Throwable $e) {
-            Log::error('Post Index Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            return redirect()->back()->with('error', 'Failed to fetch posts.');
-        }
+       
     }
 
     public function create()
     {
-        try {
-
-            $categories = Category::all();
-            return view('admin.post.create', compact('categories'));
-
-        } catch (\Throwable $e) {
-            Log::error('Post Create Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            return response()->json(['status' => 'error', 'message' => 'Failed to load create form'], 500);
-        }
+        
     }
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'title'        => 'required|unique:posts,title',
-                'slug'         => 'nullable|unique:posts,slug',
-                'keywords'     => 'nullable|string',
-                'description'  => 'nullable|string',
-                'image'        => 'nullable|string',
-                'body'         => 'nullable|string',
-                'project_url'  => 'nullable|url',
-                'video_url'  => 'nullable|url',
-                'code_url'  => 'nullable|url',
-                'categories'   => 'required|array',       // NEW
-                'categories.*' => 'exists:categories,id', // NEW
-            ]);
-
-            $post = Post::create([
-                'title'       => $request->title,
-                'slug'        => $request->slug ? Str::slug($request->slug) : Str::slug($request->title),
-                'keywords'    => $request->keywords,
-                'description' => $request->description,
-                'image'       => $request->image,
-                'body'        => $request->body,
-                'project_url' => $request->project_url,
-                'video_url' => $request->video_url,
-                'code_url' => $request->code_url,
-                'image' => $request->image_link,
-                'created_by'  => Auth::id(),
-            ]);
-
-            // Attach categories
-            $post->categories()->attach($request->categories);
-
-            return redirect()->route('admin.posts.index')
-                ->with('success', 'Post created successfully.');
-
-        } catch (\Throwable $e) {
-            Log::error('Post Store Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            return response()->json(['status' => 'error', 'message' => 'Failed to create post'], 500);
-        }
-    }
-
-    public function edit(Post $post)
-    {
-        try {
-            $categories = Category::all();
-            return view('admin.post.edit', compact('categories','post'));
-        } catch (\Throwable $e) {
-            Log::error('Post Edit Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            return response()->json(['status' => 'error', 'message' => 'Failed to load edit form'], 500);
-        }
+        
     }
 
     public function update(Request $request, Post $post)
     {
-        try {
-            // update()
-            $request->validate([
-                'title'        => 'required|unique:posts,title,' . $post->id,
-                'slug'         => 'nullable|unique:posts,slug,' . $post->id,
-                'keywords'     => 'nullable|string',
-                'description'  => 'nullable|string',
-                'image'        => 'nullable|string',
-                'body'         => 'nullable|string',
-                'project_url'  => 'nullable|url',
-                'categories'   => 'required|array',       // NEW
-                'categories.*' => 'exists:categories,id', // NEW
-                'video_url'  => 'nullable|url',
-                'code_url'  => 'nullable|url',
-            ]);
-
-            $post->update([
-                'title'       => $request->title,
-                'slug'        => $request->slug ? Str::slug($request->slug) : Str::slug($request->title),
-                'keywords'    => $request->keywords,
-                'description' => $request->description,
-                'image'       => $request->image,
-                'body'        => $request->body,
-                'project_url' => $request->project_url,
-                'video_url' => $request->video_url,
-                'code_url' => $request->code_url,
-                'updated_by'  => Auth::id(),
-            ]);
-
-            // Sync categories (overwrite old ones)
-            $post->categories()->sync($request->categories);
-
-            return redirect()->route('admin.posts.index')->with('success', 'Project updated successfully.');
-
-        } catch (\Throwable $e) {
-            Log::error('Post Update Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            return response()->json(['status' => 'error', 'message' => 'Failed to update post'], 500);
-        }
+        
     }
 
     public function destroy(Post $post)
     {
-        try {
-            $post->delete();
-            return response()->json(['status' => 'success', 'message' => 'Post deleted successfully']);
-        } catch (\Throwable $e) {
-            Log::error('Post Delete Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            return response()->json(['status' => 'error', 'message' => 'Failed to delete post'], 500);
-        }
+        
     }
 }

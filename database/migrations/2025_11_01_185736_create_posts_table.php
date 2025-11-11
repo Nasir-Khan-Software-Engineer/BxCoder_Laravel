@@ -13,19 +13,25 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
-            $table->string('slug')->unique();
-            $table->string('keywords')->nullable();
-            $table->text('description')->nullable();
-            $table->string('image')->nullable();
-            $table->longText('body')->nullable();
+
+            $table->string('title', 1000)->unique();
+            $table->string('slug', 1000)->unique();
+            $table->string('keywords', 1000);
+            $table->string('description', 1000);
+            
+            $table->text('image')->nullable();
+            $table->longText('body');
+            
             $table->string('project_url')->nullable();
             $table->string('video_url')->nullable();
             $table->string('code_url')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamps();
+            
+            $table->boolean('is_active')->default(false);
+
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

@@ -10,15 +10,27 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'keywords',
-        'short_description',
-        'details',
-        'source_code_link',
-        'video_link',
-        'documentation_link',
-        'created_by',
-        'updated_by'
+        'title', // required, unique, min: 3
+        'keywords', // required, min: 3
+        'short_description', // required, min: 3
+        'details', // required, min: 3
+        'source_code_link', // nullable
+        'video_link', // nullable
+        'documentation_link', // nullable
+        'created_by', // required foreign key
+        'updated_by' // nullable
+    ];
+
+    protected $casts = [
+        'title' => 'string',
+        'keywords' => 'string',
+        'short_description' => 'string',
+        'details' => 'string',
+        'source_code_link' => 'string',
+        'video_link' => 'string',
+        'documentation_link' => 'string',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
     ];
 
     // Creator relation

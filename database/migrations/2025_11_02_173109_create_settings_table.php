@@ -14,31 +14,35 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('site_name')->nullable();
-            $table->string('site_email')->nullable();
-            $table->string('site_phone')->nullable();
-            $table->string('site_logo')->nullable();
-            $table->string('favicon')->nullable();
-            
-            // SEO
-            $table->string('meta_title')->nullable();
-            $table->string('meta_keywords')->nullable();
-            $table->text('meta_description')->nullable();
+            $table->string('name', 1000);
+            $table->string('email', 200);
+            $table->string('phone', 11);
+            $table->string('address', 1000);
 
-            // Blog / Source Code project info
-            $table->text('copyright')->nullable();
+            $table->text('logo');
+            $table->text('favicon');
 
-            // Social Media
+            $table->string('meta_title', 200);
+            $table->string('meta_keywords', 1000);
+            $table->string('meta_description', 1000);
+
+            $table->string('copyright', 200);
+
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('youtube')->nullable();
+            $table->string('tiktok')->nullable();
 
-            // Created / Updated by
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->string('product_prefix', 10);
+            $table->string('order_prefix', 10);
+            $table->string('invoice_prefix', 10);
+
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamps();
+
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

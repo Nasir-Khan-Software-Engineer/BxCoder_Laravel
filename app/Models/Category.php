@@ -9,12 +9,20 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'slug',
-        'keywords',
-        'description',
-        'created_by',
-        'updated_by',
+        'name', // required, unique, max: 200 characters, min: 3 characters, index
+        'slug', // required, unique, max: 300 characters, min: 3 characters, index
+        'image', // null, base64 encoded string
+        'status', // required, default: 1
+        'keywords', // not null, max: 1000 characters, min: 3 characters
+        'description', // not null, max: 1000 characters, min: 3 characters
+        'created_by', // user id
+        'updated_by', // user id
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
     ];
 
     // Category created by user
