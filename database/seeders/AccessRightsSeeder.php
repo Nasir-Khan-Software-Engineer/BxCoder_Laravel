@@ -18,6 +18,12 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows viewing all registered users',
             ],
             [
+                'route_name'        => 'api.admin.user.show',
+                'short_id'          => 'user_show',
+                'short_description' => 'View single user',
+                'details'           => 'Allows viewing details of a specific user',
+            ],
+            [
                 'route_name'        => 'api.admin.user.store',
                 'short_id'          => 'user_create',
                 'short_description' => 'Create a new user',
@@ -42,6 +48,12 @@ class AccessRightsSeeder extends Seeder
                 'short_id'          => 'user_details_list',
                 'short_description' => 'View all user profiles',
                 'details'           => 'Allows listing extended user details and profiles',
+            ],
+            [
+                'route_name'        => 'api.admin.user_details.show',
+                'short_id'          => 'user_details_show',
+                'short_description' => 'View single user profile',
+                'details'           => 'Allows viewing extended profile information for a specific user',
             ],
             [
                 'route_name'        => 'api.admin.user_details.store',
@@ -70,6 +82,12 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows displaying all user roles available in system',
             ],
             [
+                'route_name'        => 'api.admin.role.show',
+                'short_id'          => 'role_show',
+                'short_description' => 'View single role',
+                'details'           => 'Allows viewing details of a specific role',
+            ],
+            [
                 'route_name'        => 'api.admin.role.store',
                 'short_id'          => 'role_create',
                 'short_description' => 'Create new role',
@@ -94,6 +112,12 @@ class AccessRightsSeeder extends Seeder
                 'short_id'          => 'access_right_list',
                 'short_description' => 'List access rights',
                 'details'           => 'Allows viewing all defined access rights',
+            ],
+            [
+                'route_name'        => 'api.admin.access_right.show',
+                'short_id'          => 'access_right_show',
+                'short_description' => 'View single access right',
+                'details'           => 'Allows viewing details of a specific access right',
             ],
             [
                 'route_name'        => 'api.admin.access_right.store',
@@ -122,6 +146,12 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows viewing all site-wide features configured in the system.',
             ],
             [
+                'route_name'        => 'api.admin.site_feature.show',
+                'short_id'          => 'site_feature_show',
+                'short_description' => 'View single site feature',
+                'details'           => 'Allows viewing details of a specific site feature.',
+            ],
+            [
                 'route_name'        => 'api.admin.site_feature.store',
                 'short_id'          => 'site_feature_create',
                 'short_description' => 'Create a new site feature',
@@ -146,6 +176,12 @@ class AccessRightsSeeder extends Seeder
                 'short_id'          => 'setting_list',
                 'short_description' => 'View settings list',
                 'details'           => 'Allows viewing all system configuration settings.',
+            ],
+            [
+                'route_name'        => 'api.admin.setting.show',
+                'short_id'          => 'setting_show',
+                'short_description' => 'View single setting',
+                'details'           => 'Allows viewing details of a specific system setting.',
             ],
             [
                 'route_name'        => 'api.admin.setting.store',
@@ -174,6 +210,12 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows viewing all product brands.',
             ],
             [
+                'route_name'        => 'api.admin.brand.show',
+                'short_id'          => 'brand_show',
+                'short_description' => 'View single brand',
+                'details'           => 'Allows viewing details of a specific brand.',
+            ],
+            [
                 'route_name'        => 'api.admin.brand.store',
                 'short_id'          => 'brand_create',
                 'short_description' => 'Create new brand',
@@ -198,6 +240,12 @@ class AccessRightsSeeder extends Seeder
                 'short_id'          => 'category_list',
                 'short_description' => 'View category list',
                 'details'           => 'Allows viewing all product categories.',
+            ],
+            [
+                'route_name'        => 'api.admin.category.show',
+                'short_id'          => 'category_show',
+                'short_description' => 'View single category',
+                'details'           => 'Allows viewing details of a specific category.',
             ],
             [
                 'route_name'        => 'api.admin.category.store',
@@ -226,6 +274,12 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows viewing all products in the system.',
             ],
             [
+                'route_name'        => 'api.admin.product.show',
+                'short_id'          => 'product_show',
+                'short_description' => 'View single product',
+                'details'           => 'Allows viewing details of a specific product.',
+            ],
+            [
                 'route_name'        => 'api.admin.product.store',
                 'short_id'          => 'product_create',
                 'short_description' => 'Create product',
@@ -250,6 +304,12 @@ class AccessRightsSeeder extends Seeder
                 'short_id'          => 'product_image_list',
                 'short_description' => 'View product image list',
                 'details'           => 'Allows viewing images associated with products.',
+            ],
+            [
+                'route_name'        => 'api.admin.product_image.show',
+                'short_id'          => 'product_image_show',
+                'short_description' => 'View single product image',
+                'details'           => 'Allows viewing details of a specific product image.',
             ],
             [
                 'route_name'        => 'api.admin.product_image.store',
@@ -278,6 +338,12 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows viewing product stock entries and inventory levels.',
             ],
             [
+                'route_name'        => 'api.admin.product_stock.show',
+                'short_id'          => 'product_stock_show',
+                'short_description' => 'View single stock entry',
+                'details'           => 'Allows viewing details of a specific product stock entry.',
+            ],
+            [
                 'route_name'        => 'api.admin.product_stock.store',
                 'short_id'          => 'product_stock_create',
                 'short_description' => 'Add product stock',
@@ -304,6 +370,12 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows viewing all projects with their details such as title, keywords, description, and links.',
             ],
             [
+                'route_name'        => 'api.admin.project.show',
+                'short_id'          => 'project_show',
+                'short_description' => 'View single project',
+                'details'           => 'Allows viewing details of a specific project.',
+            ],
+            [
                 'route_name'        => 'api.admin.project.store',
                 'short_id'          => 'project_create',
                 'short_description' => 'Create a new project',
@@ -313,7 +385,7 @@ class AccessRightsSeeder extends Seeder
                 'route_name'        => 'api.admin.project.update',
                 'short_id'          => 'project_update',
                 'short_description' => 'Update existing project',
-                'details'           => 'Allows modifying an existing project’s information and links.',
+                'details'           => 'Allows modifying an existing projects information and links.',
             ],
             [
                 'route_name'        => 'api.admin.project.destroy',
@@ -322,12 +394,18 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows permanently removing a project from the system.',
             ],
 
-// =================== POST ===================
+            // =================== POST ===================
             [
                 'route_name'        => 'api.admin.post.index',
                 'short_id'          => 'post_list',
                 'short_description' => 'View all posts',
                 'details'           => 'Allows viewing all posts including title, content, and related metadata.',
+            ],
+            [
+                'route_name'        => 'api.admin.post.show',
+                'short_id'          => 'post_show',
+                'short_description' => 'View single post',
+                'details'           => 'Allows viewing details of a specific post.',
             ],
             [
                 'route_name'        => 'api.admin.post.store',
@@ -339,7 +417,7 @@ class AccessRightsSeeder extends Seeder
                 'route_name'        => 'api.admin.post.update',
                 'short_id'          => 'post_update',
                 'short_description' => 'Update post',
-                'details'           => 'Allows modifying an existing post’s content and metadata.',
+                'details'           => 'Allows modifying an existing posts content and metadata.',
             ],
             [
                 'route_name'        => 'api.admin.post.destroy',
@@ -354,6 +432,12 @@ class AccessRightsSeeder extends Seeder
                 'short_id'          => 'comment_list',
                 'short_description' => 'View all comments',
                 'details'           => 'Allows viewing all user comments on posts or products.',
+            ],
+            [
+                'route_name'        => 'api.admin.comment.show',
+                'short_id'          => 'comment_show',
+                'short_description' => 'View single comment',
+                'details'           => 'Allows viewing details of a specific comment.',
             ],
             [
                 'route_name'        => 'api.admin.comment.store',
@@ -374,12 +458,18 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows removing a comment permanently from the system.',
             ],
 
-// =================== REVIEW ===================
+            // =================== REVIEW ===================
             [
                 'route_name'        => 'api.admin.review.index',
                 'short_id'          => 'review_list',
                 'short_description' => 'View all reviews',
                 'details'           => 'Allows viewing all reviews submitted by users on products.',
+            ],
+            [
+                'route_name'        => 'api.admin.review.show',
+                'short_id'          => 'review_show',
+                'short_description' => 'View single review',
+                'details'           => 'Allows viewing details of a specific review.',
             ],
             [
                 'route_name'        => 'api.admin.review.store',
@@ -400,12 +490,18 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows permanently deleting a product review from the system.',
             ],
 
-// =================== SUPPLIER ===================
+            // =================== SUPPLIER ===================
             [
                 'route_name'        => 'api.admin.supplier.index',
                 'short_id'          => 'supplier_list',
                 'short_description' => 'View suppliers',
                 'details'           => 'Allows viewing all suppliers registered in the system.',
+            ],
+            [
+                'route_name'        => 'api.admin.supplier.show',
+                'short_id'          => 'supplier_show',
+                'short_description' => 'View single supplier',
+                'details'           => 'Allows viewing details of a specific supplier.',
             ],
             [
                 'route_name'        => 'api.admin.supplier.store',
@@ -426,12 +522,18 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows permanently removing a supplier from the system.',
             ],
 
-// =================== COUPON ===================
+            // =================== COUPON ===================
             [
                 'route_name'        => 'api.admin.coupon.index',
                 'short_id'          => 'coupon_list',
                 'short_description' => 'View coupons',
                 'details'           => 'Allows viewing all discount coupons in the system.',
+            ],
+            [
+                'route_name'        => 'api.admin.coupon.show',
+                'short_id'          => 'coupon_show',
+                'short_description' => 'View single coupon',
+                'details'           => 'Allows viewing details of a specific coupon.',
             ],
             [
                 'route_name'        => 'api.admin.coupon.store',
@@ -452,12 +554,18 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows permanently removing a coupon from the system.',
             ],
 
-// =================== PAYMENT ===================
+            // =================== PAYMENT ===================
             [
                 'route_name'        => 'api.admin.payment.index',
                 'short_id'          => 'payment_list',
                 'short_description' => 'View payments',
                 'details'           => 'Allows viewing all payment transactions in the system.',
+            ],
+            [
+                'route_name'        => 'api.admin.payment.show',
+                'short_id'          => 'payment_show',
+                'short_description' => 'View single payment',
+                'details'           => 'Allows viewing details of a specific payment transaction.',
             ],
             [
                 'route_name'        => 'api.admin.payment.store',
@@ -478,12 +586,18 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows permanently removing a payment transaction from the system.',
             ],
 
-// =================== ORDER ===================
+            // =================== ORDER ===================
             [
                 'route_name'        => 'api.admin.order.index',
                 'short_id'          => 'order_list',
                 'short_description' => 'View orders',
                 'details'           => 'Allows viewing all orders placed by customers in the system.',
+            ],
+            [
+                'route_name'        => 'api.admin.order.show',
+                'short_id'          => 'order_show',
+                'short_description' => 'View single order',
+                'details'           => 'Allows viewing details of a specific order.',
             ],
             [
                 'route_name'        => 'api.admin.order.store',
@@ -504,12 +618,18 @@ class AccessRightsSeeder extends Seeder
                 'details'           => 'Allows permanently removing an order from the system.',
             ],
 
-// =================== ORDER ITEM ===================
+            // =================== ORDER ITEM ===================
             [
                 'route_name'        => 'api.admin.order_item.index',
                 'short_id'          => 'order_item_list',
                 'short_description' => 'View order items',
                 'details'           => 'Allows viewing all items associated with orders.',
+            ],
+            [
+                'route_name'        => 'api.admin.order_item.show',
+                'short_id'          => 'order_item_show',
+                'short_description' => 'View single order item',
+                'details'           => 'Allows viewing details of a specific order item.',
             ],
             [
                 'route_name'        => 'api.admin.order_item.store',
